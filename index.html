@@ -7,6 +7,45 @@
 	<h1>The Psychic Game</h1>
 
 	<p>Guess what letter I'm thinking of</p>
+
+	<p id="win">Wins: </p>
+
+	<p id="loss">Losses: </p>
+
+	<p id="life">Guesses Left: </p>
+
+	<p id="guesses">Your guesses so far: </p>
+
+
+<script type="text/javascript">
+	var alphabet = ['a', 'b', 'c', 'd' ,'e', 'f', 'h', 'g', 
+					'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 
+					'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
+					'y', 'z'];  								//array of the alphabet
+	var winScore = 0; 											//keeps track of wins
+	var lossScore = 0;		 									//keeys track of losses
+	var life = 9;												//number of lives
+	var answer = pickAlphabet();							//stores a randomly selected letter for player to guess
+	var guess;													//stores the answer player guesses to compare with answer
+
+	document.onkeyup = logGuess;								//prints the letter the user guesses
+
+	function pickAlphabet(){
+		var alphaIndex = parseInt(Math.random() * alphabet.length);
+		return alphabet[alphaIndex];
+	}
+
+	function logGuess(event){
+		var key = event.key;
+		var guesses = document.querySelector('#guesses');
+
+		guesses.innerText = guesses.innerText + key + " , ";
+
+		return key;
+	}
+
+
+</script>
 	
 </body>
 </html>
