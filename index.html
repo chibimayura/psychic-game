@@ -56,18 +56,23 @@
 			answer = pickAlphabet();								//picks new random alphabet
 			lifePoints = 9;											//reset lifePoints
 			life.innerText = lifePoints;							//prints current lifepoints on page
-			guesses.innerText = " ";
+			guesses.innerText = " ";								//resets the guessed keys
+			document.body.style.backgroundColor = "#b3ffb3";			//turns green bc you got the right answer
+
 		}else if(guess != answer && lifePoints > 0){
 			lifePoints--;											//subtracts lifePoints by 1
 			life.innerText = lifePoints;							//prints current lifepoints on page
 			guesses.innerText = guesses.innerText + key + " , ";    //updates the text in class guesses
+			document.body.style.backgroundColor = "#ffffff";			//turns white to make it easier to see
 		}else if(lifePoints == 0){
 			lossScore++;											//adds lossScore by 1
 			loss.innerText = lossScore;								//prints current lossScore on page
 			answer = pickAlphabet();								//picks a new random alphabet
 			lifePoints = 9;											//resets lifePoints
 			life.innerText = lifePoints;							//prints current lifepoints on page
-			guesses.innerText = " ";
+			guesses.innerText = " ";								//resets the guessed keys
+			document.body.style.backgroundColor = "ffb3b3";			//
+
 		}
 	}
 
