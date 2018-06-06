@@ -8,40 +8,67 @@
 
 	<p>Guess what letter I'm thinking of</p>
 
-	<p id="win">Wins: </p>
+	<p>Wins: <span id="win"></span></p>
 
-	<p id="loss">Losses: </p>
+	<p>Losses: <span id="loss"></span></p>
 
-	<p id="life">Guesses Left: </p>
+	<p>Guesses Left: <span id="life"></span></p>
 
-	<p id="guesses">Your guesses so far: </p>
+	<p>Your guesses so far: <span id="guesses"></span></p>
 
 
 <script type="text/javascript">
-	var alphabet = ['a', 'b', 'c', 'd' ,'e', 'f', 'h', 'g', 
-					'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 
-					'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 
-					'y', 'z'];  								//array of the alphabet
+	var alphabet = 'abcdefghijklmnopqrstuvwxyz' 				//str of the alphabet
+
 	var winScore = 0; 											//keeps track of wins
 	var lossScore = 0;		 									//keeys track of losses
-	var life = 9;												//number of lives
-	var answer = pickAlphabet();							//stores a randomly selected letter for player to guess
+	var lifePoints = 10;										//number of lives
+	var answer = pickAlphabet();								//stores a randomly selected letter for player to guess
 	var guess;													//stores the answer player guesses to compare with answer
+
+	var win = document.querySelector("#win");
+	var loss = document.querySelector("#loss");
+	var life = document.querySelector("#life");
+	var guesses = document.querySelector('#guesses');
+
+	win.innerText = winScore;
+	loss.innerText = lossScore;
+	life.innerText = lifePoints;
 
 	document.onkeyup = logGuess;								//prints the letter the user guesses
 
+	//randomly picks an alphabet letter
 	function pickAlphabet(){
 		var alphaIndex = parseInt(Math.random() * alphabet.length);
 		return alphabet[alphaIndex];
 	}
 
+	//logs the key press onto the screen
 	function logGuess(event){
 		var key = event.key;
-		var guesses = document.querySelector('#guesses');
 
-		guesses.innerText = guesses.innerText + key + " , ";
+		guess = key;
 
-		return key;
+		//if user guesses the correct key +1 win score
+		if(guess == answer) {
+			winScore++;												//adds winScore by 1
+			win.innerText =  winScore;								//prints current winscore on page
+			answer = pickAlphabet();								//picks new random alphabet
+			lifePoints = 9;											//reset lifePoints
+			life.innerText = lifePoints;							//prints current lifepoints on page
+			guesses.innerText = " ";
+		}else if(guess != answer && lifePoints > 0){
+			lifePoints--;											//subtracts lifePoints by 1
+			life.innerText = lifePoints;							//prints current lifepoints on page
+			guesses.innerText = guesses.innerText + key + " , ";    //updates the text in class guesses
+		}else if(lifePoints == 0){
+			lossScore++;											//adds lossScore by 1
+			loss.innerText = lossScore;								//prints current lossScore on page
+			answer = pickAlphabet();								//picks a new random alphabet
+			lifePoints = 9;											//resets lifePoints
+			life.innerText = lifePoints;							//prints current lifepoints on page
+			guesses.innerText = " ";
+		}
 	}
 
 
