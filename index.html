@@ -16,68 +16,6 @@
 
 	<p>Your guesses so far: <span id="guesses"></span></p>
 
-
-<script type="text/javascript">
-	var alphabet = 'abcdefghijklmnopqrstuvwxyz' 				//str of the alphabet
-
-	var winScore = 0; 											//keeps track of wins
-	var lossScore = 0;		 									//keeys track of losses
-	var lifePoints = 10;										//number of lives
-	var answer = pickAlphabet();								//stores a randomly selected letter for player to guess
-	var guess;													//stores the answer player guesses to compare with answer
-
-	var win = document.querySelector("#win");
-	var loss = document.querySelector("#loss");
-	var life = document.querySelector("#life");
-	var guesses = document.querySelector('#guesses');
-
-	win.innerText = winScore;
-	loss.innerText = lossScore;
-	life.innerText = lifePoints;
-
-	document.onkeyup = logGuess;								//prints the letter the user guesses
-
-	//randomly picks an alphabet letter
-	function pickAlphabet(){
-		var alphaIndex = parseInt(Math.random() * alphabet.length);
-		return alphabet[alphaIndex];
-	}
-
-	//logs the key press onto the screen
-	function logGuess(event){
-		var key = event.key;
-
-		guess = key;
-
-		//if user guesses the correct key +1 win score
-		if(guess == answer) {
-			winScore++;												//adds winScore by 1
-			win.innerText =  winScore;								//prints current winscore on page
-			answer = pickAlphabet();								//picks new random alphabet
-			lifePoints = 9;											//reset lifePoints
-			life.innerText = lifePoints;							//prints current lifepoints on page
-			guesses.innerText = " ";								//resets the guessed keys
-			document.body.style.backgroundColor = "#b3ffb3";			//turns green bc you got the right answer
-
-		}else if(guess != answer && lifePoints > 0){
-			lifePoints--;											//subtracts lifePoints by 1
-			life.innerText = lifePoints;							//prints current lifepoints on page
-			guesses.innerText = guesses.innerText + key + " , ";    //updates the text in class guesses
-			document.body.style.backgroundColor = "#ffffff";			//turns white to make it easier to see
-		}else if(lifePoints == 0){
-			lossScore++;											//adds lossScore by 1
-			loss.innerText = lossScore;								//prints current lossScore on page
-			answer = pickAlphabet();								//picks a new random alphabet
-			lifePoints = 9;											//resets lifePoints
-			life.innerText = lifePoints;							//prints current lifepoints on page
-			guesses.innerText = " ";								//resets the guessed keys
-			document.body.style.backgroundColor = "ffb3b3";			//
-
-		}
-	}
-
-
-</script>
-	
+<script src="assets/javascript/game.js"></script>	
 </body>
 </html>
